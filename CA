@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+   string input_str;
+   getline(cin, input_str);
+
+   // Split the input string into integers
+   vector<int> l;
+   string temp;
+   for (char c : input_str) {
+       if (c != ' ') {
+           temp += c;
+       } else {
+           l.push_back(stoi(temp));
+           temp = "";
+       }
+   }
+   l.push_back(stoi(temp));  // Add the last integer
+
+   // Sort the list in ascending order
+   sort(l.begin(), l.end());
+
+   // Print the sorted list
+   for (int num : l) {
+       cout << num << " ";
+   }
+   cout << endl;
+
+   // Find and print missing numbers
+   for (int i = l[0]; i <= l[l.size() - 1]; i++) {
+       if (find(l.begin(), l.end(), i) == l.end()) {
+           cout << i << " ";
+       }
+   }
+
+   return 0;
+}
